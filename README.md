@@ -7,11 +7,11 @@ The core of how `gosu` works is stolen directly from how Docker/libcontainer its
 ```console
 $ gosu
 Usage: ./gosu user-spec command [args]
-   eg: ./gosu tianon bash
+   eg: ./gosu cyrax13 bash
        ./gosu nobody:root bash -c 'whoami && id'
        ./gosu 1000:1 id
 
-./gosu version: 1.1 (go1.3.1 on linux/amd64; gc)
+./gosu version: 1.17.1 (go1.22.3 on linux/amd64; gc)
 ```
 
 Once the user/group is processed, we switch to that user, then we `exec` the specified process and `gosu` itself is no longer resident or involved in the process lifecycle at all.  This avoids all the issues of signal passing and TTY, and punts them to the process invoking `gosu` and the process being invoked by `gosu`, where they belong.
@@ -28,7 +28,7 @@ High-level steps:
 
 1. download `gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }')` as `gosu`
 2. download `gosu-$(dpkg --print-architecture | awk -F- '{ print $NF }').asc` as `gosu.asc`
-3. fetch my public key (to verify your download): `gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4`
+3. fetch my public key (to verify your download): `gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys F4E743F8FFCB228B84812232E2E4EAF4164FF293`
 4. `gpg --batch --verify gosu.asc gosu`
 5. `chmod +x gosu`
 
