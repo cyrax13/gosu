@@ -1,4 +1,4 @@
-package main // import "github.com/tianon/gosu"
+package main // import "github.com/cyrax13/gosu"
 
 import (
 	"os"
@@ -23,12 +23,12 @@ func usage() string {
 	v := version()
 	t := `
 Usage: ` + self + ` user-spec command [args]
-   eg: ` + self + ` tianon bash
+   eg: ` + self + ` cyrax13 bash
        ` + self + ` nobody:root bash -c 'whoami && id'
        ` + self + ` 1000:1 id
 
 ` + self + ` version: ` + v + `
-` + self + ` license: Apache-2.0 (full text at https://github.com/tianon/gosu)
+` + self + ` license: Apache-2.0 (full text at https://github.com/cyrax13/gosu)
 `
 	return t[1:]
 }
