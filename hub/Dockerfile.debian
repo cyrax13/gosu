@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 # https://github.com/cyrax13/gosu/releases
-ENV GOSU_VERSION 1.17.4
+ENV GOSU_VERSION 1.17.5
 
 RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
