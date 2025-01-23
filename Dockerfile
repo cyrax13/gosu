@@ -1,4 +1,4 @@
-FROM golang:1.22.10-bookworm
+FROM golang:1.22.11-bookworm
 
 RUN set -eux; \
 	apt-get update; \
