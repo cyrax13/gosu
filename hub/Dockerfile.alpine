@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21
 
 # https://github.com/cyrax13/gosu/releases
 ENV GOSU_VERSION 1.17.8
