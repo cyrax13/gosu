@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 # https://github.com/cyrax13/gosu/releases
-ENV GOSU_VERSION 1.17.10
+ENV GOSU_VERSION=1.17.10
 
 RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
@@ -22,5 +22,5 @@ RUN set -eux; \
 	chmod +x /usr/local/bin/gosu; \
 	gosu --version; \
 	gosu nobody true; \
-# hard link to / for ease of COPY --from
+	# hard link to / for ease of COPY --from
 	ln -v /usr/local/bin/gosu /

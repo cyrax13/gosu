@@ -28,7 +28,7 @@ RUN set -eux; \
 	chmod +x /usr/local/bin/gosu-build-and-test.sh
 
 # disable CGO for ALL THE THINGS (to help ensure no libc)
-ENV CGO_ENABLED 0
+ENV CGO_ENABLED=0
 
 WORKDIR /go/src/github.com/cyrax13/gosu
 
