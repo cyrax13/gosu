@@ -1,6 +1,6 @@
 module github.com/cyrax13/gosu
 
-go 1.22
+go 1.23
 
 require (
 	github.com/moby/sys/user v0.1.0
