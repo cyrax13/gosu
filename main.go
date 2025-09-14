@@ -14,7 +14,7 @@ func init() {
 }
 
 func version() string {
-	// 1.17.16 (go1.24.0 on linux/amd64; gc)
+	// 1.17.16 (go1.24.7 on linux/amd64; gc)
 	return Version + ` (` + runtime.Version() + ` on ` + runtime.GOOS + `/` + runtime.GOARCH + `; ` + runtime.Compiler + `)`
 }
 
