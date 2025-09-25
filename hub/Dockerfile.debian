@@ -1,7 +1,7 @@
 FROM debian:trixie-slim
 
 # https://github.com/cyrax13/gosu/releases
-ENV GOSU_VERSION=1.18.0
+ENV GOSU_VERSION=1.19.0
 
 RUN set -eux; \
 	savedAptMark="$(apt-mark showmanual)"; \
