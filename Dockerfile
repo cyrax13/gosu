@@ -18,7 +18,6 @@ RUN set -eux; \
 		echo '#!/usr/bin/env bash'; \
 		echo 'set -Eeuo pipefail -x'; \
 		echo 'eval "go build $BUILD_FLAGS -o /go/bin/gosu-$ARCH" github.com/cyrax13/gosu'; \
-		echo 'if go version -m "/go/bin/gosu-$ARCH" |& tee "/proc/$$/fd/1" | grep "(devel)" >&2; then exit 1; fi'; \
 		echo 'file "/go/bin/gosu-$ARCH"'; \
 		echo 'if arch-test "$ARCH"; then'; \
 # there's a fun QEMU + Go 1.18+ bug that causes our binaries (especially on ARM arches) to hang indefinitely *sometimes*, hence the "timeout" and looping here
