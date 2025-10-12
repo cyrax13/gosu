@@ -11,7 +11,7 @@ Usage: ./gosu user-spec command [args]
        ./gosu nobody:root bash -c 'whoami && id'
        ./gosu 1000:1 id
 
-./gosu version: 1.19.0 (go1.24.7 on linux/amd64; gc)
+./gosu version: 1.19.0 (go1.24.8 on linux/amd64; gc)
 ```
 
 Once the user/group is processed, we switch to that user, then we `exec` the specified process and `gosu` itself is no longer resident or involved in the process lifecycle at all.  This avoids all the issues of signal passing and TTY, and punts them to the process invoking `gosu` and the process being invoked by `gosu`, where they belong.
