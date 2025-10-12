@@ -52,15 +52,22 @@ root         1  0.0  0.0   7140   768 ?        Rs+  02:22   0:00 ps aux
 
 Additionally, due to the fact that `gosu` is using Docker's own code for processing these `user:group`, it has exact 1:1 parity with Docker's own `--user` flag.
 
-If you're curious about the edge cases that `gosu` handles, see [`Dockerfile.test`](Dockerfile.test) for the "test suite" (and the associated [`test.sh`](test.sh) script that wraps this up for testing arbitrary binaries).
+If you're curious about the edge cases that `gosu` handles, see [`Dockerfile.test-alpine`](Dockerfile.test-alpine) for the "test suite" (and the associated [`test.sh`](test.sh) script that wraps this up for testing arbitrary binaries).
 
-(Note that `sudo` has different goals from this project, and it is *not* intended to be a `sudo` replacement; for example, see [this Stack Overflow answer](https://stackoverflow.com/a/48105623) for a short explanation of why `sudo` does `fork`+`exec` instead of just `exec`.)
+(Note that `sudo` has different goals from this project, and it is *not* intended to be a `sudo` replacement; for example, see [this Stack Overflow answer](https://stackoverflow.com/a/48105623/433558) for a short explanation of why `sudo` does `fork`+`exec` instead of just `exec`.)
+
 
 ## Alternatives
 
-### `su-exec`
+### `setpriv`
 
-As mentioned in `INSTALL.md`, [`su-exec`](https://github.com/ncopa/su-exec) is a very minimal re-write of `gosu` in C, making for a much smaller binary, and is available in the `main` Alpine package repository.
+Available in newer `util-linux` (`>= 2.32.1-0.2`, in Debian; https://manpages.debian.org/buster/util-linux/setpriv.1.en.html):
+
+```console
+$ docker run -it --rm buildpack-deps:buster-scm setpriv --reuid=nobody --regid=nogroup --init-groups ps faux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+nobody       1  5.0  0.0   9592  1252 pts/0    RNs+ 23:21   0:00 ps faux
+```
 
 ### `chroot`
 
@@ -72,15 +79,9 @@ USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 nobody       1  5.0  0.0   7136   756 ?        Rs+  17:04   0:00 ps aux
 ```
 
-### `setpriv`
+### `su-exec`
 
-Available in newer `util-linux` (`>= 2.32.1-0.2`, in Debian; https://manpages.debian.org/buster/util-linux/setpriv.1.en.html):
-
-```console
-$ docker run -it --rm buildpack-deps:buster-scm setpriv --reuid=nobody --regid=nogroup --init-groups ps faux
-USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-nobody       1  5.0  0.0   9592  1252 pts/0    RNs+ 23:21   0:00 ps faux
-```
+In the Alpine Linux ecosystem, [`su-exec`](https://github.com/ncopa/su-exec) is a minimal re-write of `gosu` in C, making for a much smaller binary, and is available in the `main` Alpine package repository.  However, as of version 0.2 it has [a pretty severe parser bug](https://github.com/ncopa/su-exec/pull/26) that hasn't been in a release for many years (and which the buggy behavior is that typos lead to running code as root unexpectedly 😬).
 
 ### Others
 
