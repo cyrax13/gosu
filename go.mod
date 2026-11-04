@@ -3,6 +3,6 @@ module github.com/cyrax13/gosu
 go 1.26
 
 require (
-	github.com/moby/sys/user v0.1.0
+	github.com/moby/sys/user v0.4.1
 	golang.org/x/sys v0.1.0
 )
